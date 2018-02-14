@@ -46,25 +46,37 @@ public class Searcher {
             return output;
         }
         
+
         while(iter.hasNext()) {
+            while(heap.size() < k) {
+                heap.insert(iter.next());
+            }
+            heap.removeMin();
             heap.insert(iter.next());
         }
         
-        if(k <= input.size()) {
-           int count = 0;
-           while(count<input.size()-k) {
-               heap.removeMin();
-           }
-           while(!heap.isEmpty()) {
-               output.add(heap.removeMin());
-           }
-        }else {
-            //sort all
-            while(!heap.isEmpty()) {
-                output.add(heap.removeMin());
-            }
-            
+        while(!heap.isEmpty()) {
+            output.add(heap.removeMin());
         }
+        
+        
+        
+//        if(k <= input.size()) {
+//            
+//           int count = 0;
+//           while(count<input.size()-k) {
+//               heap.removeMin();
+//           }
+//           while(!heap.isEmpty()) {
+//               output.add(heap.removeMin());
+//           }
+//        }else {
+//            //sort all
+//            while(!heap.isEmpty()) {
+//                output.add(heap.removeMin());
+//            }
+//            
+//        }
         
         return output;
     }
