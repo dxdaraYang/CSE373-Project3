@@ -71,6 +71,7 @@ public class TestTopKSortFunctionality extends BaseTest {
     public void testSortEmpty() {
         IList<Integer> list = new DoubleLinkedList<>();       
         IList<Integer> top = Searcher.topKSort(10, list); // should return a empty list
+        assertEquals(0,top.size());
         assertEquals(list,top);
     }
     
@@ -98,5 +99,19 @@ public class TestTopKSortFunctionality extends BaseTest {
         assertEquals(0, top.size());
         
     }
+    
+    
+    @Test(timeout=5*SECOND)
+    public void testSortFewOfLargeArray() {
+        IList<Integer> list = new DoubleLinkedList<>();
+        int cap = 100000;
+        for (int i = 0; i < cap; i++) {
+            list.add(i);
+        }
+        IList<Integer> top = Searcher.topKSort(5, list);
+        assertEquals(5, top.size());
+        
+    }
+    
     
 }
